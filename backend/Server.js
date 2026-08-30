@@ -5,7 +5,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const { getZodiacSign, getZodiacSymbol } = require('./lib/zodiac');
+const { getZodiacSign, getZodiacSymbol } = require('./libs/zodiac');
 const { getDailyHoroscope } = require('./services/astrology_service');
 const { generateRoast } = require('./services/roast_service');
 
