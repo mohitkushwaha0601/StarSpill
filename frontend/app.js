@@ -3,7 +3,7 @@
  * Integrated voice + form mode
  */
 
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = window.APP_CONFIG?.API_BASE_URL || 'http://localhost:8000';
 
 // DOM Elements
 const voiceScreen = document.getElementById('voiceScreen');

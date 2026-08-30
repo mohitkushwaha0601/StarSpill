@@ -3,6 +3,9 @@
  * Fixed: race conditions, stuck states, fallback to form
  */
 
+// Get API URL from configuration
+const API_BASE_URL = window.APP_CONFIG?.API_BASE_URL || 'http://localhost:8000';
+
 const QUESTIONS = [
   { key: "name", text: "What is your name?" },
   { key: "dob", text: "What is your date of birth?", parse: parseDob },
@@ -267,7 +270,7 @@ function initVoiceFlow({ onPhaseChange, onComplete, onAnswer, onFallback }) {
 
     try {
       setPhase("loading", { text: "Generating your roast..." });
-      const res = await fetch("http://localhost:8000/api/roast", {
+      const res = await fetch(`${API_BASE_URL}/api/roast`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
