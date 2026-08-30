@@ -1,5 +1,5 @@
 /**
- * Astro Roast - Backend API Server server.js
+ * Astro Roast - Backend API Server
  */
 
 require('dotenv').config();
@@ -12,8 +12,17 @@ const { generateRoast } = require('./services/roast_service');
 const app = express();
 const PORT = process.env.PORT || 8000;
 
+// CORS Configuration
+const corsOptions = {
+    origin: process.env.CORS_ORIGIN 
+        ? process.env.CORS_ORIGIN.split(',').map(origin => origin.trim())
+        : '*', // Allow all origins in development if not set
+    credentials: true,
+    optionsSuccessStatus: 200
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Health check
