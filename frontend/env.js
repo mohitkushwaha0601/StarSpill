@@ -1,5 +1,5 @@
-// This file will be replaced during Vercel deployment
-// The build process will inject the correct API URL
+// This file contains the backend API URL configuration
+// Set VITE_API_URL in Vercel environment variables
 window.ENV = {
-  API_URL: 'REPLACE_WITH_RAILWAY_URL'
+  API_URL: '__VITE_API_URL__'
 };
