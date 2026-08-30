@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StarSpill — AI Astrology Roast</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Sora:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="cosmicCanvas" class="cosmic-canvas"></canvas>
+
+    <div class="container">
+        <!-- Mode Toggle -->
+        <div class="mode-toggle">
+            <button id="modeVoice" class="mode-btn active" title="Voice Input">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                    <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                </svg>
+                Voice
+            </button>
+            <button id="modeForm" class="mode-btn" title="Form Input">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                </svg>
+                Form
+            </button>
+        </div>
+
+        <!-- Voice Screen -->
+        <div id="voiceScreen" class="screen active">
+            <div class="logo">✦</div>
+            <h1>Star<span class="accent">Spill</span></h1>
+            <p class="tagline">Speak to the stars.<br>They'll roast you back.</p>
+
+            <canvas id="voiceWaveCanvas" class="voice-wave-canvas"></canvas>
+
+            <div id="voiceQuestion" class="voice-question" style="display:none;">
+                <p id="voiceQuestionText" class="voice-question-text"></p>
+                <p id="voiceAnswerText" class="voice-answer-text"></p>
+            </div>
+
+            <button id="voiceBtn" class="voice-btn" title="Start the roast">
+                <svg id="voiceIconIdle" viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                    <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                    <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                </svg>
+                <svg id="voiceIconListening" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" style="display:none;">
+                    <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                    <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                </svg>
+                <svg id="voiceIconLoading" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
+                    <path d="M12 2v4m0 12v4m-7.07-3.93l2.83-2.83m8.48-8.48l2.83-2.83M2 12h4m12 0h4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83"/>
+                </svg>
+            </button>
+
+            <p id="voiceStatus" class="voice-status">Tap to begin your cosmic reading</p>
+        </div>
+
+        <!-- Form Screen (existing) -->
+        <div id="formScreen" class="screen">
+            <div class="logo">✦</div>
+            <h1>Star<span class="accent">Spill</span></h1>
+            <p class="tagline">Get your horoscope.<br>Then get absolutely roasted.</p>
+
+            <form id="roastForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <div class="dob-inputs">
+                        <input type="number" id="dobDay" placeholder="DD" min="1" max="31" required>
+                        <span>/</span>
+                        <input type="number" id="dobMonth" placeholder="MM" min="1" max="12" required>
+                        <span>/</span>
+                        <input type="number" id="dobYear" placeholder="YYYY" min="1900" max="2026" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="obsession">What's one thing you're obsessed with?</label>
+                    <input type="text" id="obsession" name="obsession" placeholder="e.g., Cricket, Coding, Coffee" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Roast Intensity</label>
+                    <div class="intensity-options">
+                        <label class="intensity-option">
+                            <input type="radio" name="intensity" value="mild" checked>
+                            <span class="intensity-card">
+                                <span class="intensity-icon">😇</span>
+                                <span class="intensity-label">Mild</span>
+                            </span>
+                        </label>
+                        <label class="intensity-option">
+                            <input type="radio" name="intensity" value="savage">
+                            <span class="intensity-card">
+                                <span class="intensity-icon">🔥</span>
+                                <span class="intensity-label">Savage</span>
+                            </span>
+                        </label>
+                        <label class="intensity-option">
+                            <input type="radio" name="intensity" value="nuclear">
+                            <span class="intensity-card">
+                                <span class="intensity-icon">☢️</span>
+                                <span class="intensity-label">Nuclear</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary">ROAST ME 🔥</button>
+            </form>
+        </div>
+
+        <!-- Loading Screen -->
+        <div id="loadingScreen" class="screen">
+            <div class="loader">✦</div>
+            <p id="loadingText" class="loading-text">Consulting the stars...</p>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="resultScreen" class="screen">
+            <div class="result-header">
+                <div class="zodiac-symbol" id="zodiacSymbol">♌</div>
+                <div class="zodiac-name" id="zodiacName">LEO</div>
+                <h2 id="userName">Roast</h2>
+            </div>
+
+            <div class="roast-container">
+                <div class="roast-icon">🔥</div>
+                <div id="roastContent" class="roast-content"></div>
+            </div>
+
+            <div class="verdict-container">
+                <div class="verdict-header">✦ Astro Verdict</div>
+                <div id="verdictContent" class="verdict-content"></div>
+            </div>
+
+            <div class="result-actions">
+                <button id="roastAgainBtn" class="btn-primary">ROAST AGAIN 🔥</button>
+                <button id="copyRoastBtn" class="btn-secondary">COPY ROAST</button>
+            </div>
+        </div>
+
+        <!-- Error Screen -->
+        <div id="errorScreen" class="screen">
+            <div class="error-icon">😵</div>
+            <h2>Oops!</h2>
+            <p id="errorMessage" class="error-message">
+                Even the stars couldn't figure this one out.<br>Try again.
+            </p>
+            <button id="tryAgainBtn" class="btn-primary">TRY AGAIN</button>
+        </div>
+    </div>
+
+    <script src="cosmic-field.js"></script>
+    <script src="voice-wave.js"></script>
+    <script src="voice.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

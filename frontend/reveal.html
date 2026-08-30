@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Reading — StarSpill</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Sora:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .reveal-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+        .back-link {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: var(--accent-gold); }
+        .reveal-header {
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+        .reveal-zodiac {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+        }
+        .reveal-name {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-top: 0.75rem;
+        }
+        .voice-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            margin-top: 2.5rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-halo);
+        }
+        .voice-section-header {
+            border-bottom: 1px solid oklch(0.82 0.14 78 / 12%);
+            padding: 1.5rem 1.5rem 0.5rem;
+        }
+        .voice-section-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+        }
+        .voice-section-body {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1rem 1.5rem 1.5rem;
+        }
+        .voice-section-status {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .roast-lines {
+            margin-top: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+        .roast-line {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 0.8rem;
+            padding: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .roast-line.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .roast-line.verdict {
+            color: var(--accent-gold);
+            font-style: italic;
+        }
+        .reveal-footer {
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+        }
+        .no-reading {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
+        }
+        .no-reading .btn-primary {
+            display: inline-flex;
+            margin-top: 1.5rem;
+        }
+        .voice-wave-reveal {
+            width: 100%;
+            height: 60px;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="cosmicCanvas" class="cosmic-canvas"></canvas>
+
+    <div class="container reveal-container" id="revealContent" style="display:none;">
+        <a href="index.html" class="back-link">← recast the chart</a>
+
+        <header class="reveal-header">
+            <div>
+                <p class="reveal-zodiac" id="revealZodiac"></p>
+                <h1 class="reveal-name" id="revealName"></h1>
+            </div>
+        </header>
+
+        <section class="voice-section">
+            <div class="voice-section-header">
+                <p class="voice-section-label">voice of the void</p>
+            </div>
+            <canvas id="revealWaveCanvas" class="voice-wave-reveal"></canvas>
+            <div class="voice-section-body">
+                <p class="voice-section-status" id="revealSpeakStatus">Silence. For now.</p>
+                <button id="speakBtn" class="btn-primary" style="width:auto; margin-top:0;">Hear the verdict</button>
+            </div>
+        </section>
+
+        <div class="roast-lines" id="roastLines"></div>
+
+        <p class="reveal-footer">Written in the stars. Deniable in court.</p>
+    </div>
+
+    <div class="no-reading" id="noReading" style="display:none;">
+        <p id="noReadingMsg">No reading found. Start from the beginning.</p>
+        <a href="index.html" class="btn-primary" style="display:inline-flex;">Back to the observatory</a>
+    </div>
+
+    <script src="cosmic-field.js"></script>
+    <script src="voice-wave.js"></script>
+    <script src="reveal.js"></script>
+</body>
+</html>
