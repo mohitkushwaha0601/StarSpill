@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔮 Astro Roast - Get Roasted by the Stars</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="container">
+        <!-- Main Form Screen -->
+        <div id="formScreen" class="screen active">
+            <div class="logo">🔮</div>
+            <h1>ASTRO ROAST</h1>
+            <p class="tagline">Get your horoscope.<br>Then get absolutely roasted.</p>
+
+            <form id="roastForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        placeholder="Enter your name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <div class="dob-inputs">
+                        <input 
+                            type="number" 
+                            id="dobDay" 
+                            placeholder="DD" 
+                            min="1" 
+                            max="31"
+                            required
+                        >
+                        <span>/</span>
+                        <input 
+                            type="number" 
+                            id="dobMonth" 
+                            placeholder="MM" 
+                            min="1" 
+                            max="12"
+                            required
+                        >
+                        <span>/</span>
+                        <input 
+                            type="number" 
+                            id="dobYear" 
+                            placeholder="YYYY" 
+                            min="1900" 
+                            max="2024"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="obsession">What's one thing you're obsessed with?</label>
+                    <input 
+                        type="text" 
+                        id="obsession" 
+                        name="obsession" 
+                        placeholder="e.g., Cricket, Coding, Coffee"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Roast Intensity</label>
+                    <div class="intensity-options">
+                        <label class="intensity-option">
+                            <input type="radio" name="intensity" value="mild" checked>
+                            <span class="intensity-card">
+                                <span class="intensity-icon">😇</span>
+                                <span class="intensity-label">Mild</span>
+                            </span>
+                        </label>
+                        <label class="intensity-option">
+                            <input type="radio" name="intensity" value="savage">
+                            <span class="intensity-card">
+                                <span class="intensity-icon">🔥</span>
+                                <span class="intensity-label">Savage</span>
+                            </span>
+                        </label>
+                        <label class="intensity-option">
+                            <input type="radio" name="intensity" value="nuclear">
+                            <span class="intensity-card">
+                                <span class="intensity-icon">☢️</span>
+                                <span class="intensity-label">Nuclear</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary">
+                    ROAST ME 🔥
+                </button>
+            </form>
+        </div>
+
+        <!-- Loading Screen -->
+        <div id="loadingScreen" class="screen">
+            <div class="loader">🔮</div>
+            <p id="loadingText" class="loading-text">Consulting the stars...</p>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="resultScreen" class="screen">
+            <div class="result-header">
+                <div class="zodiac-symbol" id="zodiacSymbol">♌</div>
+                <div class="zodiac-name" id="zodiacName">LEO</div>
+                <h2 id="userName">Rahul's Roast</h2>
+            </div>
+
+            <div class="roast-container">
+                <div class="roast-icon">🔥</div>
+                <div id="roastContent" class="roast-content">
+                    <!-- Roast content will be inserted here -->
+                </div>
+            </div>
+
+            <div class="verdict-container">
+                <div class="verdict-header">🔮 Astro Verdict</div>
+                <div id="verdictContent" class="verdict-content">
+                    <!-- Verdict will be inserted here -->
+                </div>
+            </div>
+
+            <div class="result-actions">
+                <button id="roastAgainBtn" class="btn-primary">ROAST AGAIN 🔥</button>
+                <button id="copyRoastBtn" class="btn-secondary">COPY ROAST</button>
+            </div>
+        </div>
+
+        <!-- Error Screen -->
+        <div id="errorScreen" class="screen">
+            <div class="error-icon">😵</div>
+            <h2>Oops!</h2>
+            <p id="errorMessage" class="error-message">
+                Even the stars couldn't figure this one out.<br>
+                Try again.
+            </p>
+            <button id="tryAgainBtn" class="btn-primary">TRY AGAIN</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

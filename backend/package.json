@@ -1,0 +1,17 @@
+{
+  "name": "astro-roast-backend",
+  "version": "1.0.0",
+  "description": "Astro Roast Backend API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "node-fetch": "^2.7.0"
+  }
+}
