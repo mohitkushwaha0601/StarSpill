@@ -1,5 +1,5 @@
 /**
- * Astro Roast - Backend API Server
+ * Astro Roast - Backend API Server server.js
  */
 
 require('dotenv').config();
